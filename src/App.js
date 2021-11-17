@@ -1,9 +1,13 @@
-import './App.css';
+
+import Form from "./components/Form"
+import './App.scss';
 
 function App() {
   return (
     <div className="App">
-      HOME
+      {/* <Header /> */}
+      <Form />
+      {/* <ResultPage /> */}
     </div>
   );
 }
