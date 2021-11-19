@@ -2,6 +2,7 @@ import React from "react";
 
 export const namePattern = /^([^0-9]*)$/i;
 export const specificWordPattern = /\b(?!none)\S+/g
+
 export const errorStyles = (errors, name) => {
     const errorExists = errors[name]?.message
     if (errorExists) {
@@ -42,23 +43,19 @@ export const nameVal = (required, minLength, maxLength, pattern) => {
         }
     };
 };
-export const numberVal = (required, minLength, maxLength, pattern) => {
+export const numberVal = (required, maxLength, obj) => {
     return {
         required: {
             value: required,
             message: "Required field !"
         },
-        // minLength: {
-        //     value: minLength,
-        //     message: `Pass min ${minLength} number !`
-        // },
-        // maxLength: {
-        // value: maxLength,
-        // message: `Max ${maxLength} numbers !`
-        // },
+        maxLength: {
+            value: maxLength,
+            message: `Max ${maxLength} digits !`
+        },
         pattern: {
-            value: pattern,
-            message: `Between 1-10 !`
+            value: obj.pattern,
+            message: `Between ${obj.minNumber ? obj.minNumber : 1} - ${obj.maxNumber} !`
         },
 
     };

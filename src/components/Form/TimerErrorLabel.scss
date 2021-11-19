@@ -1,0 +1,72 @@
+.timerErrorLabel {
+    margin: 10px 0;
+    border: 2px solid transparent;
+    background-color: transparent;
+    position: absolute;
+    top: -25px;
+    right: -15px;
+    width: 30px;
+    height: 30px;
+    padding-top: 10px;
+    padding-right: 10px;
+    overflow: hidden;
+    transition: all 0.3s 0.3s ease-in-out;
+    z-index: -9;
+    opacity: 0;
+
+    .timerErrorLabel__tooltip {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        justify-content: flex-end;
+        cursor: pointer;
+
+        span {
+            padding-left: 10px;
+            font-weight: bolder;
+            position: absolute;
+            top: 10px;
+            left: 0;
+            opacity: 0;
+            transition: all 0.3s 0.3s ease-in-out;
+        }
+        .tooltip__icon {
+            font-size: 16px;
+            color: #f79f1f;
+        }
+    }
+
+    &__description {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin-top: 10px;
+        padding-left: 10px;
+        padding-right: 10px;
+        opacity: 0;
+        transition: all 0.3s 0.5s ease-in-out;
+
+        p {
+            font-size: 12px;
+            font-weight: bolder;
+            color: black;
+        }
+    }
+
+    &:hover .timerErrorLabel__description,
+    &:hover .timerErrorLabel__tooltip span {
+        opacity: 1;
+    }
+}
+.timerErrorLabel:hover {
+    width: 80%;
+    height: 140px;
+    border: 2px solid rgba(0, 0, 0, 0.7);
+    border-radius: 10px;
+    background-color: rgba(245, 245, 245, 0.8);
+}
+
+.timerErrorLabel--active {
+    z-index: 9;
+    opacity: 1;
+}

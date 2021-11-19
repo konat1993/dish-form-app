@@ -2,34 +2,27 @@ import React from 'react'
 import { BiDownArrowCircle } from 'react-icons/bi'
 import { useForm } from "react-hook-form"
 
+import { postRequest } from '../../api//postRequest'
+import TimerErrorLabel from './TimerErrorLabel'
 import { nameVal, namePattern, numberVal, errorLabel, selectVal, specificWordPattern, errorStyles } from './formValidate'
-
 import "./Form.scss"
+import SelectedInputs from './SelectedInputs'
+
 export const Form = () => {
-    const { register, watch, handleSubmit, formState: { errors } } = useForm({
+    const { register, unregister, watch, handleSubmit, formState: { errors } } = useForm({
         mode: "onBlur"
     })
     const watchFields = (name) => watch(name)
-
-    // const timeValue = () => {
-    //     const hours = watchFields("prepTime__hours")
-    //     const minutes = watchFields("prepTime__minutes")
-    //     const seconds = watchFields("prepTime__seconds")
-
-    //     return `${hours}:${minutes}:${seconds}`
-    // }
-
     const onSubmit = (data) => {
-        console.log(data)
+        postRequest(data)
     }
-
     return (
         <div className="form">
             <form className="form__content" onSubmit={handleSubmit(onSubmit)}>
                 <div className="content__dishName">
                     <label htmlFor="dishName">Dish name*</label>
-                    <input type="text" id="dishName" {...register("dishName", nameVal(true, 3, 12, namePattern))} />
-                    {errorLabel(errors, "dishName")}
+                    <input type="text" id="dishName" {...register("name", nameVal(true, 3, 12, namePattern))} />
+                    {errorLabel(errors, "name")}
                 </div>
                 <div className="content__prepTime">
                     <label className="prepTime__label">
@@ -41,9 +34,8 @@ export const Form = () => {
                         style={errorStyles(errors, "prepTime__hours")}
                         type="number"
                         placeholder="h"
-                        {...register("prepTime__hours", numberVal(true, 2, 2))}
+                        {...register("prepTime__hours", numberVal(true, 2, { pattern: /^([0-9]|[0-9][0-9])$/, maxNumber: 99 }))}
                     />
-                    {/* {errorLabel(errors, "prepTime__hours")} */}
 
                     <span className="prepTime__divider">:</span>
                     <input
@@ -51,9 +43,8 @@ export const Form = () => {
                         style={errorStyles(errors, "prepTime__minutes")}
                         type="number"
                         placeholder="min"
-                        {...register("prepTime__minutes", numberVal(true, 2, 2))}
+                        {...register("prepTime__minutes", numberVal(true, 2, { pattern: /^([0-9]|[0-5][0-9])$/, maxNumber: 59 }))}
                     />
-                    {/* {errorLabel(errors, "prepTime__minutes")} */}
 
                     <span className="prepTime__divider">:</span>
                     <input
@@ -61,58 +52,69 @@ export const Form = () => {
                         style={errorStyles(errors, "prepTime__seconds")}
                         type="number"
                         placeholder="s"
-                        {...register("prepTime__seconds", numberVal(true, 2, 2))}
+                        {...register("prepTime__seconds", numberVal(true, 2, { pattern: /^([0-9]|[0-5][0-9])$/, maxNumber: 59 }))}
                     />
-                    {/* <input type="hidden"  {...register("prepTime", numberVal(true, 2, 2))} /> */}
-                    {/* {errorLabel(errors, "prepTime")} */}
-
+                    <TimerErrorLabel errors={errors} />
                 </div>
 
                 <div className="content__dishType">
                     <label className="dishType__label">Select dish type*</label>
                     <div className="dishType__selectWrapper">
-                        <select {...register("dishType", selectVal(specificWordPattern))}>
+                        <select {...register("type", selectVal(specificWordPattern))}>
                             <option value="none">select dish type</option>
-                            <option value="Pizza">Pizza</option>
-                            <option value="Soup">Soup</option>
-                            <option value="Sandwich">Sandwich</option>
+                            <option value="pizza">Pizza</option>
+                            <option value="soup">Soup</option>
+                            <option value="sandwich">Sandwich</option>
                         </select>
                         <div className="selectWrapper__arrow">
                             <BiDownArrowCircle className="arrow__icon" />
                         </div>
                     </div>
-                    {errorLabel(errors, "dishType")}
+                    {errorLabel(errors, "type")}
                 </div>
                 <div className="content__selectedInputs">
-                    {watchFields("dishType") === "Pizza" && (
-                        <>
+                    {watchFields("type") === "pizza" && (
+                        <SelectedInputs
+                            unregister={unregister}
+                            names={["no_of_slices", "diameter"]}
+                        >
                             <div className="inputWrapper__section">
                                 <label className="section__label" htmlFor="noOfSlices">Number of slices*</label>
-                                <input type="number"  {...register("pizza.noOfSlices", numberVal(true, 1, 2, /\b([1-9]|10)\b/))} />
-                                {errorLabel(errors, "pizza.noOfSlices")}
+                                <input type="number"  {...register("no_of_slices", numberVal(true, 2, { pattern: /^([1-9]|[0-1][0])$/, maxNumber: 10 }))} />
+                                {errorLabel(errors, "no_of_slices")}
                             </div>
                             <div className="inputWrapper__section">
                                 <label className="section__label" htmlFor="diameter">Diameter*</label>
-                                <input type="number"  {...register("pizza.diameter", numberVal(true, 1, 2))} />
-                                {errorLabel(errors, "pizza.diameter")}
+                                <input type="number"  {...register("diameter", numberVal(true, 2, { pattern: /^([2-3][0-9]|[4][0])$/, minNumber: 20, maxNumber: 40 }))} />
+                                {errorLabel(errors, "diameter")}
                             </div>
-                        </>
+                        </SelectedInputs>
                     )}
-                    {watchFields("dishType") === "Soup" && (
-                        <div className="inputWrapper__section">
-                            <label className="section__label">How spicy do you want?*</label>
-                            <input type="number"  {...register("soup.spicinessScale", numberVal(true, 1, 2, /\b([1-9]|10)\b/))} />
-                            {errorLabel(errors, "soup.spicinessScale")}
+                    {watchFields("type") === "soup" && (
+                        <SelectedInputs
+                            unregister={unregister}
+                            names={["spiciness_scale"]}
+                        >
+                            <div className="inputWrapper__section">
+                                <label className="section__label">How spicy do you want?*</label>
+                                <input type="number"  {...register("spiciness_scale", numberVal(true, 1, 2, /\b([1-9]|10)\b/))} />
+                                {errorLabel(errors, "spiciness_scale")}
 
-                        </div>
+                            </div>
+                        </SelectedInputs>
                     )}
-                    {watchFields("dishType") === "Sandwich" && (
-                        <div className="inputWrapper__section">
-                            <label className="section__label">How many slices do you wish?*</label>
-                            <input type="number"  {...register("sandwich.slicesOfBread", numberVal(true, 1, 2, /\b([1-9]|10)\b/))} />
-                            {errorLabel(errors, "sandwich.slicesOfBread")}
+                    {watchFields("type") === "sandwich" && (
+                        <SelectedInputs
+                            unregister={unregister}
+                            names={["slices_of_bread"]}
+                        >
+                            <div className="inputWrapper__section">
+                                <label className="section__label">How many slices do you wish?*</label>
+                                <input type="number"  {...register("slices_of_bread", numberVal(true, 1, 2, /\b([1-9]|10)\b/))} />
+                                {errorLabel(errors, "slices_of_bread")}
 
-                        </div>
+                            </div>
+                        </SelectedInputs>
                     )}
                 </div>
                 <div className="content__submit">

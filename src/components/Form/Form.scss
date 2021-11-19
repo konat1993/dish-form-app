@@ -5,7 +5,7 @@
 
     overflow: scroll;
     overflow-x: hidden;
-    height: calc(100vh - 60px);
+    // height: calc(100vh - 60px);
 
     -ms-overflow-style: none;
     scrollbar-width: none;
@@ -47,7 +47,7 @@
                 font-size: 1rem;
             }
 
-            .dishName--error {
+            .name--error {
                 color: rgb(184, 17, 17);
                 font-size: 0.7rem;
                 font-weight: bold;
@@ -104,7 +104,9 @@
                 font-size: 2rem;
                 padding: 0 5px;
             }
-            .prepTime--error {
+            .prepTime__hours--error,
+            .prepTime__minutes--error,
+            .prepTime__seconds--error {
                 color: rgb(184, 17, 17);
                 font-size: 0.7rem;
                 font-weight: bold;
@@ -172,7 +174,7 @@
                 }
             }
 
-            .dishType--error {
+            .type--error {
                 color: rgb(208, 25, 25);
                 font-size: 0.7rem;
                 font-weight: bold;
@@ -216,10 +218,10 @@
                     left: 25px;
                 }
 
-                .noOfSlices--error,
+                .no_of_slices--error,
                 .diameter--error,
-                .spicinessScale--error,
-                .slicesOfBread--error {
+                .spiciness_scale--error,
+                .slices_of_bread--error {
                     color: rgb(184, 17, 17);
                     font-size: 0.7rem;
                     font-weight: bold;
