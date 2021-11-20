@@ -2,6 +2,16 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+
+# See demo project below:
+## [DEMO Project: https://form-dish-app.web.app/](https://form-dish-app.web.app/)
+
+## User features:
+- Dish order
+- Order time counter page
+- Go back to dish order
+
+
 ## Available Scripts
 
 In the project directory, you can run:
