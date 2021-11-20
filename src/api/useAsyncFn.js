@@ -7,6 +7,7 @@ const URL = "https://frosty-wood-6558.getsandbox.com:443/dishes"
 export const useAsyncFn = () => {
     const { setIsLoading, setData } = React.useContext(FormContext)
     const [error, setError] = React.useState(null)
+    const [resetInputs, setResetInputs] = React.useState(false)
 
     const postRequest = async (data) => {
         setIsLoading(true)
@@ -17,7 +18,8 @@ export const useAsyncFn = () => {
             setData(data.data)
             setTimeout(() => {
                 setIsLoading(false)
-            }, 1000);
+                setResetInputs(true)
+            }, 5000);
             return data
         })
             .catch(err => {
@@ -27,7 +29,7 @@ export const useAsyncFn = () => {
         return request
     }
     return [
-        { error },
+        { error, resetInputs, setResetInputs },
         postRequest
     ]
 }

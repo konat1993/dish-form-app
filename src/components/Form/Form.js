@@ -1,6 +1,7 @@
-import React, { useContext } from 'react'
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useContext, useEffect } from 'react'
 import { LoadingButton } from '@mui/lab'
-import { BiDownArrowCircle } from 'react-icons/bi'
+import { BiDownArrowCircle, BiDish } from 'react-icons/bi'
 import { useForm } from "react-hook-form"
 
 import useAsyncFn from '../../api/useAsyncFn'
@@ -10,16 +11,34 @@ import { nameVal, namePattern, numberVal, errorLabel, selectVal, specificWordPat
 import SelectedInputs from '../SelectedInputs/SelectedInputs'
 import "./Form.scss"
 import { FormContext } from '../../context/FormContextProvider'
+import { useNavigate } from 'react-router'
 
 export const Form = () => {
-    const [{ }, postRequest] = useAsyncFn(null)
-    const { isLoading } = useContext(FormContext)
-    const { register, unregister, watch, handleSubmit, formState: { errors } } = useForm({
+    const [{ error, resetInputs, setResetInputs }, postRequest] = useAsyncFn(null)
+    const { isLoading, setTimeData } = useContext(FormContext)
+    const navigate = useNavigate()
+    const { register, unregister, watch, handleSubmit, formState: { errors, }, reset } = useForm({
         mode: "onBlur"
     })
     const watchFields = (name) => watch(name)
 
+
+    useEffect(() => {
+        error && alert(error)
+    }, [error])
+    useEffect(() => {
+        if (resetInputs) {
+            resetInputs && reset()
+            setResetInputs(false)
+            navigate("/home/result")
+        }
+    }, [resetInputs])
+
     const onSubmit = (data) => {
+        const { prepTime__hours: h,
+            prepTime__minutes: min,
+            prepTime__seconds: sec } = data
+        setTimeData({ h, min, sec })
         const newData = convertRequestData(data)
         postRequest(newData)
     }
@@ -138,11 +157,11 @@ export const Form = () => {
                     </div>
                     <div className="content__submit">
                         <LoadingButton
-                            // onClick={() => console.log("value2", value)}
                             className="submit__btn"
                             type="submit"
                             loading={isLoading}
-                            loadingIndicator="Loading..."
+                            endIcon={<BiDish className="submit__icon" />}
+                            loadingPosition="end"
                             variant="outlined"
                             sx={{ color: "rgb(20, 38, 128)", textTransform: "none" }}
                         >

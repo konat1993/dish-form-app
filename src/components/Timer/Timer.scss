@@ -1,0 +1,19 @@
+.timer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 15px;
+
+    &__hours,
+    &__minutes,
+    &__seconds {
+        border: 2px solid rgba(0, 0, 0, 0.3);
+        border-radius: 3px;
+        padding: 5px 10px;
+        margin-right: 5px;
+        font-weight: bold;
+    }
+    &__seconds {
+        margin-right: 0;
+    }
+}

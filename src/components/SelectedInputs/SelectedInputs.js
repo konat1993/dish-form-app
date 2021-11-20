@@ -6,6 +6,7 @@ const SelectedInputs = ({ children, unregister, names }) => {
         return () => {
             return names.map(name => unregister(name))
         }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [unregister])
     return (
         <div className="selectedInputs">

@@ -258,6 +258,13 @@
                     transform: scale(0.98);
                 }
             }
+            .Mui-disabled {
+                background-color: rgba(0, 0, 0, 0.469);
+                color: rgba(255, 255, 255, 0.8);
+            }
+            .submit__icon {
+                font-size: 1.5rem;
+            }
         }
     }
 }
@@ -325,6 +332,10 @@
             .content__submit {
                 width: 100%;
                 .submit__btn {
+                    display: flex;
+                    justify-content: center;
+                    width: fit-content;
+                    margin: 0 auto;
                     transition: letter-spacing 0.4s ease, background-color 0.4s ease;
                     &:hover {
                         background-color: transparent;
@@ -334,6 +345,11 @@
                     }
                 }
                 .css-1yt7yx7-MuiLoadingButton-loadingIndicator {
+                    letter-spacing: 5px;
+                }
+                .Mui-disabled {
+                    background-color: transparent;
+                    color: rgba(88, 88, 88, 0.503);
                     letter-spacing: 5px;
                 }
             }
