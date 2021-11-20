@@ -7,7 +7,7 @@ const prepTimeMerge = (data) => {
     return time
 }
 
-export const dataToPost = (data) => {
+export const convertRequestData = (data) => {
     const createNewData = { ...data }
     delete createNewData["prepTime__hours"]
     delete createNewData["prepTime__minutes"]
@@ -28,4 +28,4 @@ export const dataToPost = (data) => {
     return newData
 }
 
-export default dataToPost
+export default convertRequestData

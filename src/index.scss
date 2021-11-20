@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Estonia&display=swap");
+
 * {
   margin: 0;
   padding: 0;
@@ -11,6 +13,14 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background-color: gray;
   background-color: transparent;
+
+  background-color: black;
+
+  min-height: 100vh;
+  background-image: url("https://p0.pikist.com/photos/140/309/pizza-background-food-snack-mass-pizzeria.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position-x: 70%;
 
   overflow-y: hidden;
   overflow-x: scroll;

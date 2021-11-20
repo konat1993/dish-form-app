@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Pacifico&display=swap");
 .form {
     width: 100vw;
     height: calc(100vh - 90px);
@@ -15,6 +16,8 @@
     &::-webkit-scrollbar {
         display: none;
     }
+
+    animation: initFader 0.2s ease-in forwards;
 
     .form__content {
         width: 300px;
@@ -81,7 +84,6 @@
                 outline: none;
                 border: none;
                 background-color: rgba(0, 0, 0, 0.2);
-                // background-color: rgba(255, 255, 255, 0.463);
                 color: whitesmoke;
                 padding: 10px 15px;
                 border-radius: 2px;
@@ -235,15 +237,14 @@
         .content__submit {
             margin: 10px 20px;
             .submit__btn {
-                background-color: rgba(0, 128, 0, 0.843);
+                font-family: "Pacifico", cursive;
                 outline: none;
                 border: none;
                 padding: 10px;
                 height: 50px;
                 border-radius: 3px;
                 width: 100%;
-                font-size: 1rem;
-                color: rgba(0, 0, 0, 0.8);
+                font-size: 1.8rem;
                 cursor: pointer;
                 letter-spacing: 1px;
                 font-weight: bold;
@@ -251,7 +252,7 @@
                 transition: background-color 0.2s ease-in-out;
 
                 &:hover {
-                    background-color: rgba(0, 157, 0, 0.7);
+                    background-color: rgba(255, 255, 255, 0.3);
                 }
                 &:active {
                     transform: scale(0.98);
@@ -289,9 +290,9 @@
             justify-content: center;
             flex-wrap: wrap;
             background-color: rgba(236, 236, 236, 0.8);
+            background-color: #f3ead4;
             border-radius: 6px;
             width: 560px;
-            // border: 3px solid rgb(245, 180, 61);
             box-shadow: 0 10px 100px black;
 
             .content {
@@ -322,15 +323,32 @@
                 }
             }
             .content__submit {
-                width: 60%;
+                width: 100%;
                 .submit__btn {
-                    color: rgb(54, 54, 54) !important;
+                    transition: letter-spacing 0.4s ease, background-color 0.4s ease;
+                    &:hover {
+                        background-color: transparent;
+                        color: rgb(31, 160, 51);
+                        letter-spacing: 5px;
+                        text-decoration: underline;
+                    }
+                }
+                .css-1yt7yx7-MuiLoadingButton-loadingIndicator {
+                    letter-spacing: 5px;
                 }
             }
         }
     }
 }
 
+@keyframes initFader {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
 @keyframes appear {
     0% {
         opacity: 0;

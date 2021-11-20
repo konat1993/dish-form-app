@@ -1,0 +1,52 @@
+.loader {
+    background-image: url("https://p0.pikist.com/photos/140/309/pizza-background-food-snack-mass-pizzeria.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position-x: 70%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 99999999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    box-shadow: inset 0px 100px 150px black;
+    opacity: 0;
+    animation: fade 0.6s 0.1s ease-in-out forwards;
+    font-family: "Estonia", cursive;
+
+    .restaurantLogo-loader {
+        height: 100px;
+        animation: jump 1.4s ease-in-out infinite;
+    }
+
+    p {
+        font-size: 4rem;
+        color: rgb(233, 233, 233);
+        opacity: 1;
+    }
+}
+@keyframes jump {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes fade {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
