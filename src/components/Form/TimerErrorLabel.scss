@@ -25,7 +25,7 @@
             padding-left: 10px;
             font-weight: bolder;
             position: absolute;
-            top: 10px;
+            top: 5px;
             left: 0;
             opacity: 0;
             transition: all 0.3s 0.3s ease-in-out;
@@ -69,4 +69,13 @@
 .timerErrorLabel--active {
     z-index: 9;
     opacity: 1;
+}
+
+@media screen and (min-width: 1024px) {
+    .timerErrorLabel {
+        left: 0;
+    }
+    .timerErrorLabel:hover {
+        background-color: rgba(171, 171, 171, 0.8);
+    }
 }

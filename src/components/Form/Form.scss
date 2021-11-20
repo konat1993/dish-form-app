@@ -1,11 +1,12 @@
 .form {
     width: 100vw;
-    height: 100vh;
+    height: calc(100vh - 90px);
     background-color: rgba(255, 255, 255, 0.4);
+    margin-top: 90px;
+    padding-bottom: 30px;
 
     overflow: scroll;
     overflow-x: hidden;
-    // height: calc(100vh - 60px);
 
     -ms-overflow-style: none;
     scrollbar-width: none;
@@ -17,9 +18,8 @@
 
     .form__content {
         width: 300px;
+        padding-top: 100px;
         margin: 0 auto;
-        padding-top: 50px;
-        padding-bottom: 20px;
 
         .content__dishName {
             padding: 10px 20px;
@@ -227,6 +227,7 @@
                     font-weight: bold;
                     width: 100%;
                     margin-top: 3px;
+                    animation: appear 0.3s ease forwards;
                     margin-left: 20px;
                 }
             }
@@ -257,5 +258,101 @@
                 }
             }
         }
+    }
+}
+
+.name--error,
+.type--error,
+.no_of_slices--error,
+.diameter--error,
+.spiciness_scale--error,
+.slices_of_bread--error {
+    animation: appear 0.3s ease forwards;
+}
+
+@media screen and (min-width: 1024px) {
+    input,
+    label,
+    .prepTime__divider {
+        color: rgb(110, 110, 110) !important;
+    }
+
+    .form {
+        margin-top: 130px;
+        height: calc(100vh - 130px);
+
+        .form__content {
+            margin-top: 100px;
+            padding-top: 30px;
+            padding-bottom: 20px;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            background-color: rgba(236, 236, 236, 0.8);
+            border-radius: 6px;
+            width: 560px;
+            // border: 3px solid rgb(245, 180, 61);
+            box-shadow: 0 10px 100px black;
+
+            .content {
+                &__left {
+                    .content__dishName {
+                        height: 82px;
+                        .name--error {
+                            position: absolute;
+                            bottom: 0;
+                            left: 10px;
+                        }
+                    }
+                    margin-bottom: 20px;
+                }
+                &__right {
+                    label[name="diameter"] {
+                        transform: translateX(-60%);
+                        width: 220px;
+                    }
+                    input[name="diameter"] {
+                        transform: translate(-60%);
+                    }
+                    .diameter--error {
+                        position: absolute;
+                        bottom: -10px;
+                        left: -125px;
+                    }
+                }
+            }
+            .content__submit {
+                width: 60%;
+                .submit__btn {
+                    color: rgb(54, 54, 54) !important;
+                }
+            }
+        }
+    }
+}
+
+@keyframes appear {
+    0% {
+        opacity: 0;
+        transform: translateX(-3%);
+    }
+    20% {
+        transform: translateX(3%);
+    }
+
+    40% {
+        transform: translateX(-2%);
+    }
+
+    60% {
+        transform: translateX(2%);
+    }
+
+    80% {
+        transform: translateX(-1%);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0%);
     }
 }
