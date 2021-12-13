@@ -134,7 +134,7 @@ export const Form = () => {
                                 >
                                     <div className="inputWrapper__section">
                                         <label className="section__label">How spicy do you want?*</label>
-                                        <input disabled={isLoading} type="number"  {...register("spiciness_scale", numberVal(true, 1, 2, /\b([1-9]|10)\b/))} />
+                                        <input disabled={isLoading} type="number"  {...register("spiciness_scale", numberVal(true, 2, { pattern: /^([1-9]|[0-1][0])$/, maxNumber: 10 }))} />
                                         {errorLabel(errors, "spiciness_scale")}
 
                                     </div>
@@ -147,7 +147,7 @@ export const Form = () => {
                                 >
                                     <div className="inputWrapper__section">
                                         <label className="section__label">How many slices do you wish?*</label>
-                                        <input disabled={isLoading} type="number"  {...register("slices_of_bread", numberVal(true, 1, 2, /\b([1-9]|10)\b/))} />
+                                        <input disabled={isLoading} type="number"  {...register("slices_of_bread", numberVal(true, 2, { pattern: /^([1-9]|[0-1][0])$/, maxNumber: 10 }))} />
                                         {errorLabel(errors, "slices_of_bread")}
 
                                     </div>

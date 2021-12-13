@@ -13,14 +13,7 @@ export const errorStyles = (errors, name) => {
     }
 };
 export const errorLabel = (errors, name) => {
-    if (name.includes(".") && Object.keys(errors).length !== 0) {
-        const nestedPaths = name.split(".")
-        const newPathNameErrors = errors[nestedPaths[0]] && errors[nestedPaths[0]][nestedPaths[1]]
-
-        return newPathNameErrors && <span className={`${nestedPaths[1] && nestedPaths[1]}--error`}>{newPathNameErrors.message}</span>;
-    } else {
-        return errors[name] && <span className={`${name}--error`} > {errors[name].message}</span >;
-    }
+    return errors[name] && <span className={`${name}--error`} > {errors[name].message}</span >;
 };
 
 export const nameVal = (required, minLength, maxLength, pattern) => {
@@ -44,6 +37,7 @@ export const nameVal = (required, minLength, maxLength, pattern) => {
     };
 };
 export const numberVal = (required, maxLength, obj) => {
+    const { pattern, minNumber = 1, maxNumber } = obj
     return {
         required: {
             value: required,
@@ -54,8 +48,8 @@ export const numberVal = (required, maxLength, obj) => {
             message: `Max ${maxLength} digits !`
         },
         pattern: {
-            value: obj.pattern,
-            message: `Between ${obj.minNumber ? obj.minNumber : 1} - ${obj.maxNumber} !`
+            value: pattern,
+            message: `Between ${minNumber} - ${maxNumber} !`
         },
 
     };
