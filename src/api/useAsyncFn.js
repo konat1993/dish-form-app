@@ -15,6 +15,7 @@ export const useAsyncFn = () => {
             URL,
             data
         ).then(data => {
+            console.log("Data response from fetch request: ", data)
             setData(data.data)
             setTimeout(() => {
                 setIsLoading(false)
@@ -25,6 +26,7 @@ export const useAsyncFn = () => {
             .catch(err => {
                 setError(err)
                 alert(err)
+                setIsLoading(false)
             })
         return request
     }
