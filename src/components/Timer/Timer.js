@@ -9,12 +9,20 @@ const defaultRemainingTime = {
 export const Timer = ({ countDownTimeStampMs }) => {
     const [remainingTime, setRemainingTime] = useState(defaultRemainingTime)
 
-
     useEffect(() => {
         const intervalId = setInterval(() => {
             updateRemainingTime(countDownTimeStampMs)
         }, 1000);
-        return () => clearInterval(intervalId)
+
+        const time = countDownTimeStampMs - Date.now()
+        const timeoutId = setTimeout(() => {
+            clearInterval(intervalId)
+        }, time);
+
+        return () => {
+            clearTimeout(timeoutId)
+            clearInterval(intervalId)
+        }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
     const updateRemainingTime = (countdown) => {
